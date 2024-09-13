@@ -1,13 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import itemReducer from './itemSlice';
 
 const store = configureStore({
-  reducer: {
-    items: itemReducer,
-  },
+  reducer: {}, // Empty for now
 });
 
 export default store;
-
-
-

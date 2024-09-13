@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems, deleteItem, updateItem } from '../Redux/itemSlice';
+import { fetchItems, deleteItem, updateItem } from '../api/itemApi';
 import { useNavigate } from 'react-router-dom';
 
 const ItemList = () => {
-  const dispatch = useDispatch();
-  const { items, loading } = useSelector((state) => state.items);
-  const navigate = useNavigate();
+  const [items, setItems] = useState([]);
   const [editMode, setEditMode] = useState(null);
   const [updatedName, setUpdatedName] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchItems());
-  }, [dispatch]);
+    const loadItems = async () => {
+      const fetchedItems = await fetchItems();
+      setItems(fetchedItems);
+    };
+    loadItems();
+  }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  const handleUpdate = (id) => {
-    dispatch(updateItem({ id, name: updatedName, description: updatedDescription }));
+  const handleUpdate = async (id) => {
+    await updateItem(id, { name: updatedName, description: updatedDescription });
     setEditMode(null);
+    const updatedItems = await fetchItems();
+    setItems(updatedItems); // Refresh items list
+  };
+
+  const handleDelete = async (id) => {
+    await deleteItem(id);
+    const updatedItems = await fetchItems();
+    setItems(updatedItems); // Refresh items list
   };
 
   return (
@@ -60,7 +66,7 @@ const ItemList = () => {
                   Update
                 </button>
                 <button
-                  onClick={() => dispatch(deleteItem(item._id))}
+                  onClick={() => handleDelete(item._id)}
                   className="bg-red-500 text-white px-4 py-2 rounded ml-2"
                 >
                   Delete
@@ -82,4 +88,5 @@ const ItemList = () => {
 };
 
 export default ItemList;
+
 

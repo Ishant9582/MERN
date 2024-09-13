@@ -28,6 +28,7 @@ const Item = require('./models/Item');
 
 // Create
 app.post('/items', async (req, res) => {
+  console.log(req.body)
   const newItem = new Item({ name: req.body.name, description: req.body.description });
   await newItem.save();
   res.json(newItem);

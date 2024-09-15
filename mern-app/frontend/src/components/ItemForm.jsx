@@ -31,7 +31,7 @@ const ItemForm = () => {
 
           {/* Item Description Field */}
           <div className="relative">
-            <input
+            <textarea
               type="text"
               {...register('description', { required: 'Description is required' })}
               placeholder="Item Description"

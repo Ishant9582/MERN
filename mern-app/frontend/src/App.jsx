@@ -9,8 +9,8 @@ const App = () => {
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold text-center mb-4">Item Manager</h1>
         <Routes>
-          <Route path="/" element={<ItemForm />} />
-          <Route path="/items" element={<ItemList />} />
+          <Route path="/items" element={<ItemForm />} />
+          <Route path="/" element={<ItemList />} />
         </Routes>
       </div>
     </Router>

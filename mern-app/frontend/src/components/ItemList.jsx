@@ -15,6 +15,12 @@ const ItemList = () => {
       setItems(fetchedItems);
     };
     loadItems();
+    // When this line is executed, the code inside loadItems will run. In this case,
+    //  it fetches data using the fetchItems()
+    //  function and updates the state with setItems(fetchedItems).
+    // This call ensures that as soon as the component mounts
+    //  (or the useEffect runs), the loadItems function is 
+    //  triggered to fetch the data and update the state with it.
   }, []);
 
   const handleUpdate = async (id) => {
@@ -38,9 +44,12 @@ const ItemList = () => {
           {items.map((item) => (
             <li
               key={item._id}
+              //Each li is given a unique key based on the item._id, which is important in React to help efficiently track changes in lists.
               className="p-4 bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               {editMode === item._id ? (
+                //When editMode matches the item._id, it shows the editing UI (input fields for name and description and a "Save" button).
+                //Otherwise, it shows the display UI (the name and description and buttons for "Update" and "Delete").
                 <>
                   <input
                     type="text"

@@ -6,14 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const ItemForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
-
   const onSubmit = async (data) => {
-    console.log(data);
-    await addItem(data);
+    //console.log(data) ; 
+    await addItem(data) ;
     navigate('/'); // Navigate to item list after adding
     //okok
   };
-
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-purple-600 via-red-500 to-yellow-500 animate-fade-in">
       <div className="max-w-md w-full bg-white bg-opacity-90 p-8 rounded-lg shadow-lg transform transition-transform hover:scale-105 duration-300 ease-in-out">
